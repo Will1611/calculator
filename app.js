@@ -1,5 +1,7 @@
 "use strict";
 
+// Arithmetic functions
+
 function add(...nums) {
   let sum = 0;
   for (let num of nums) {
