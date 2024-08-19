@@ -3,33 +3,21 @@
 // Arithmetic functions
 
 function add(...nums) {
-  let sum = 0;
-  for (let num of nums) {
-    sum += num;
-  }
-  return sum;
+  return nums.reduce((acc, curr) => acc + curr);
 }
 
 function subtract(...nums) {
-  let firstNum = nums[0];
-  for (let i = 1; i < nums.length; i++) {
-    firstNum -= nums[i];
-  }
-  return firstNum;
+  return nums.reduce((acc, curr) => acc - curr);
 }
 
 function multiply(...nums) {
-  let firstNum = nums[0];
-  for (let i = 1; i < nums.length; i++) {
-    firstNum *= nums[i];
-  }
-  return firstNum;
+  return nums.reduce((acc, curr) => acc * curr);
 }
 
 function divide(...nums) {
-  let firstNum = nums[0];
-  for (let i = 1; i < nums.length; i++) {
-    firstNum /= nums[i];
+  if (nums.includes(0)) {
+    console.log(`NOPE`);
+  } else {
+    return nums.reduce((acc, curr) => acc / curr);
   }
-  return firstNum;
 }
