@@ -4,45 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="app.js"></script>
     <title>Calculator</title>
   </head>
   <body>
     <div class="calculator">
       <div class="screen">
-        <span>0</span>
+        <span class="input">0</span>
       </div>
       <div class="keypad">
         <div class="row">
-          <div class="btn btn-top"><span>AC</span></div>
-          <div class="btn btn-top"><span>+/-</span></div>
-          <div class="btn btn-top"><span>%</span></div>
-          <div class="btn btn-side"><span>/</span></div>
+          <div class="btn btn-top btn-clear"><span>AC</span></div>
+          <div class="btn btn-top btn-neg"><span>+/-</span></div>
+          <div class="btn btn-top btn-operator btn-percent"><span>%</span></div>
+          <div class="btn btn-side btn-operator"><span>/</span></div>
         </div>
         <div class="row">
           <div class="btn btn-middle btn-number"><span>7</span></div>
           <div class="btn btn-middle btn-number"><span>8</span></div>
           <div class="btn btn-middle btn-number"><span>9</span></div>
-          <div class="btn btn-side"><span>*</span></div>
+          <div class="btn btn-side btn-operator"><span>*</span></div>
         </div>
         <div class="row">
           <div class="btn btn-middle btn-number"><span>4</span></div>
           <div class="btn btn-middle btn-number"><span>5</span></div>
           <div class="btn btn-middle btn-number"><span>6</span></div>
-          <div class="btn btn-side"><span>-</span></div>
+          <div class="btn btn-side btn-operator"><span>-</span></div>
         </div>
         <div class="row">
           <div class="btn btn-middle btn-number"><span>1</span></div>
           <div class="btn btn-middle btn-number"><span>2</span></div>
           <div class="btn btn-middle btn-number"><span>3</span></div>
-          <div class="btn btn-side"><span>+</span></div>
+          <div class="btn btn-side btn-operator"><span>+</span></div>
         </div>
         <div class="row">
           <div class="btn btn-50 btn-middle btn-number"><span>0</span></div>
-          <div class="btn btn-25 btn-middle"><span>.</span></div>
+          <div class="btn btn-25 btn-middle btn-number"><span>.</span></div>
           <div class="btn btn-25 btn-side"><span>=</span></div>
         </div>
       </div>
     </div>
+
+    <script src="app.js" defer></script>
   </body>
 </html>
