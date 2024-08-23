@@ -10,9 +10,17 @@ function checkLogic() {
 
 const input = document.querySelector(`.input`);
 
+const btnDivide = document.querySelector(`.btn-divide`);
+const btnMultiply = document.querySelector(`.btn-multiply`);
+const btnSubtract = document.querySelector(`.btn-subtract`);
+const btnAdd = document.querySelector(`.btn-add`);
+const btnEquals = document.querySelector(`.btn-equals`);
+
 const btnClear = document.querySelector(`.btn-clear`);
 const btnNeg = document.querySelector(`.btn-neg`);
 const btnPercent = document.querySelector(`.btn-percent`);
+
+const btnOps = Array.from(document.querySelectorAll(".btn-operator"));
 const btnNums = Array.from(document.querySelectorAll(".btn-number"));
 
 // Logic variables
@@ -43,67 +51,116 @@ function divide(...nums) {
   }
 }
 
-// Other functions
+// Event Listeners
 
-// function pushEquation(btn) {
-//   equation.push(btn.textContent);
-// }
+btnNums.forEach((btn) => {
+  btn.addEventListener(`click`, () => {
+    numbers.push(btn.textContent);
 
-function getNumbers() {
-  btnNums.forEach((btn) => {
-    btn.addEventListener(`click`, () => {
-      equation.push(btn.textContent);
-      numbers.push(btn.textContent);
-
-      input.textContent = numbers.join(``);
-
-      checkLogic();
-    });
-    return numbers;
-  });
-}
-
-function clear() {
-  btnClear.addEventListener(`click`, () => {
-    input.textContent = 0;
-    numbers = [];
-    equation = [];
+    input.textContent = numbers.join(``);
 
     checkLogic();
   });
-}
+});
 
-function negate() {
-  btnNeg.addEventListener(`click`, () => {
-    if (input.textContent != 0) {
-      if (isNegative === false) {
-        isNegative = true;
-        numbers.unshift(`-`);
-        input.textContent = numbers.join(``);
+btnClear.addEventListener(`click`, () => {
+  input.textContent = 0;
+  numbers = [];
+  equation = [];
 
-        checkLogic();
-      } else {
-        isNegative = false;
-        numbers.shift();
-        input.textContent = numbers.join(``);
+  checkLogic();
+});
 
-        checkLogic();
-      }
+btnNeg.addEventListener(`click`, () => {
+  if (input.textContent !== `0`) {
+    if (isNegative === false) {
+      isNegative = true;
+      numbers.unshift(`-`);
+      input.textContent = numbers.join(``);
+
+      checkLogic();
+    } else {
+      isNegative = false;
+      numbers.shift();
+      input.textContent = numbers.join(``);
+
+      checkLogic();
     }
+  }
+});
+
+btnPercent.addEventListener(`click`, () => {
+  // numbers.pop(input.textContent.length);
+
+  if (input.textContent !== `0`) {
+    input.textContent /= 100;
+    numbers.push(input.textContent);
+    equation.push(input.textContent);
+
+    // numbers = [];
+
+    checkLogic();
+  }
+});
+
+// Operator buttons
+
+btnAdd.addEventListener(`click`, () => {
+  btnOps.forEach((btn) => {
+    btn.style.backgroundColor = `#4f4fc2`;
   });
-}
 
-function percentage() {
-  btnPercent.addEventListener(`click`, () => {
-    console.log(`clicked`);
+  btnEquals.style.backgroundColor = `#4f4fc2`;
+
+  btnAdd.style.backgroundColor = `#aaaafb`;
+  equation.push(numbers.join(``), `+`);
+
+  numbers = [];
+
+  checkLogic();
+});
+
+btnSubtract.addEventListener(`click`, () => {
+  btnOps.forEach((btn) => {
+    btn.style.backgroundColor = `#4f4fc2`;
   });
-}
 
-// equation.push(equation.join(``));
+  btnEquals.style.backgroundColor = `#4f4fc2`;
 
-// Run code
+  btnSubtract.style.backgroundColor = `#aaaafb`;
+  equation.push(numbers.join(``), `-`);
 
-getNumbers();
-clear();
-negate();
-percentage();
+  numbers = [];
+
+  checkLogic();
+});
+
+btnMultiply.addEventListener(`click`, () => {
+  btnOps.forEach((btn) => {
+    btn.style.backgroundColor = `#4f4fc2`;
+  });
+
+  btnEquals.style.backgroundColor = `#4f4fc2`;
+
+  btnMultiply.style.backgroundColor = `#aaaafb`;
+  equation.push(numbers.join(``), `*`);
+
+  numbers = [];
+
+  checkLogic();
+});
+
+btnDivide.addEventListener(`click`, () => {
+  btnOps.forEach((btn) => {
+    btn.style.backgroundColor = `#4f4fc2`;
+  });
+
+  btnEquals.style.backgroundColor = `#4f4fc2`;
+
+  btnDivide.style.backgroundColor = `#aaaafb`;
+  equation.push(numbers.join(``), `/`);
+
+  numbers = [];
+
+  checkLogic();
+});

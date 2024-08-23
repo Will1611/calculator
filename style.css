@@ -32,8 +32,7 @@ body {
   border: 2px solid black;
   padding: 20px;
   flex-direction: column;
-
-  box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.295);
+  box-shadow: 6px 3px 5px #0000004b;
 }
 
 .screen {
@@ -50,6 +49,10 @@ body {
   gap: 5px;
   margin-bottom: 20px;
   font-family: "Digital Counter 7";
+}
+
+.input {
+  overflow: hidden;
 }
 
 .keypad {
@@ -80,7 +83,7 @@ body {
 }
 
 .btn-top {
-  background-color: #974646;
+  background-color: #c24f4f;
 }
 
 .btn-top:hover {
@@ -88,7 +91,7 @@ body {
 }
 
 .btn-side {
-  background-color: #464697;
+  background-color: #4f4fc2;
 }
 
 .btn-side:hover {
@@ -96,7 +99,7 @@ body {
 }
 
 .btn-middle {
-  background-color: #469746;
+  background-color: #4fc24f;
 }
 
 .btn-middle:hover {
