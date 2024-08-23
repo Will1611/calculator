@@ -6,25 +6,36 @@ function checkLogic() {
   console.log(equation, numbers, isNegative);
 }
 
+function clearConsole() {
+  console.clear();
+}
+
 // DOM elements
 
+// Screen display
 const input = document.querySelector(`.input`);
 
+// Individual blue buttons
 const btnDivide = document.querySelector(`.btn-divide`);
 const btnMultiply = document.querySelector(`.btn-multiply`);
 const btnSubtract = document.querySelector(`.btn-subtract`);
 const btnAdd = document.querySelector(`.btn-add`);
 const btnEquals = document.querySelector(`.btn-equals`);
 
+// Individual red buttons
 const btnClear = document.querySelector(`.btn-clear`);
 const btnNeg = document.querySelector(`.btn-neg`);
 const btnPercent = document.querySelector(`.btn-percent`);
 
+// Button arrays
 const btnOps = Array.from(document.querySelectorAll(".btn-operator"));
 const btnNums = Array.from(document.querySelectorAll(".btn-number"));
 
-// Logic variables
+// Colors
+const lightBlue = `#aaaafb`;
+const darkBlue = `#4f4fc2`;
 
+// Logic variables
 let equation = [];
 let numbers = [];
 let isNegative = false;
@@ -51,8 +62,16 @@ function divide(...nums) {
   }
 }
 
-// Event Listeners
+// Misc functions
+function changeColor() {
+  btnOps.forEach((btn) => {
+    if (btn.style.backgroundColor === darkBlue) {
+      btn.style.backgroundColor = lightBlue;
+    } else btn.style.backgroundColor = darkBlue;
+  });
+}
 
+// Green buttons
 btnNums.forEach((btn) => {
   btn.addEventListener(`click`, () => {
     numbers.push(btn.textContent);
@@ -60,15 +79,20 @@ btnNums.forEach((btn) => {
     input.textContent = numbers.join(``);
 
     checkLogic();
+    changeColor();
   });
 });
 
+// Red buttons
 btnClear.addEventListener(`click`, () => {
   input.textContent = 0;
   numbers = [];
   equation = [];
 
   checkLogic();
+  // clearConsole();
+
+  changeColor();
 });
 
 btnNeg.addEventListener(`click`, () => {
@@ -94,73 +118,63 @@ btnPercent.addEventListener(`click`, () => {
 
   if (input.textContent !== `0`) {
     input.textContent /= 100;
+    numbers = [];
     numbers.push(input.textContent);
-    equation.push(input.textContent);
-
-    // numbers = [];
 
     checkLogic();
   }
 });
 
-// Operator buttons
+// Blue buttons
 
-btnAdd.addEventListener(`click`, () => {
-  btnOps.forEach((btn) => {
-    btn.style.backgroundColor = `#4f4fc2`;
+function pushEquation(btn) {
+  let operator;
+
+  switch (btn) {
+    case btnAdd:
+      operator = `+`;
+      break;
+    case btnSubtract:
+      operator = `-`;
+      break;
+    case btnMultiply:
+      operator = `*`;
+      break;
+    case btnDivide:
+      operator = `*`;
+      break;
+  }
+
+  btn.addEventListener(`click`, () => {
+    changeColor();
+    btnEquals.style.backgroundColor = darkBlue;
+
+    btn.style.backgroundColor = lightBlue;
+    equation.push(numbers.join(``), operator);
+
+    numbers = [];
+
+    checkLogic();
   });
+}
 
-  btnEquals.style.backgroundColor = `#4f4fc2`;
+// btnAdd.addEventListener(`click`, () => {
+//   changeColor();
+//   btnEquals.style.backgroundColor = darkBlue;
 
-  btnAdd.style.backgroundColor = `#aaaafb`;
-  equation.push(numbers.join(``), `+`);
+//   btnAdd.style.backgroundColor = lightBlue;
+//   equation.push(numbers.join(``), `+`);
 
-  numbers = [];
+//   numbers = [];
 
-  checkLogic();
-});
+//   checkLogic();
+// });
 
-btnSubtract.addEventListener(`click`, () => {
-  btnOps.forEach((btn) => {
-    btn.style.backgroundColor = `#4f4fc2`;
-  });
+// Operate
 
-  btnEquals.style.backgroundColor = `#4f4fc2`;
+pushEquation(btnAdd);
+pushEquation(btnDivide);
+pushEquation(btnSubtract);
+pushEquation(btnMultiply);
 
-  btnSubtract.style.backgroundColor = `#aaaafb`;
-  equation.push(numbers.join(``), `-`);
-
-  numbers = [];
-
-  checkLogic();
-});
-
-btnMultiply.addEventListener(`click`, () => {
-  btnOps.forEach((btn) => {
-    btn.style.backgroundColor = `#4f4fc2`;
-  });
-
-  btnEquals.style.backgroundColor = `#4f4fc2`;
-
-  btnMultiply.style.backgroundColor = `#aaaafb`;
-  equation.push(numbers.join(``), `*`);
-
-  numbers = [];
-
-  checkLogic();
-});
-
-btnDivide.addEventListener(`click`, () => {
-  btnOps.forEach((btn) => {
-    btn.style.backgroundColor = `#4f4fc2`;
-  });
-
-  btnEquals.style.backgroundColor = `#4f4fc2`;
-
-  btnDivide.style.backgroundColor = `#aaaafb`;
-  equation.push(numbers.join(``), `/`);
-
-  numbers = [];
-
-  checkLogic();
-});
+// getNums();
