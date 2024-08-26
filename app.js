@@ -1,3 +1,5 @@
+// hello
+
 "use strict";
 
 // Temp functions
