@@ -1,5 +1,3 @@
-// hello
-
 "use strict";
 
 // Temp functions
@@ -119,32 +117,7 @@ btnPercent.addEventListener(`click`, () => {
 
 // Blue buttons
 
-function pushEquation(btn) {
-  let operator;
-
-  switch (btn) {
-    case btnAdd:
-      operator = `+`;
-      break;
-    case btnSubtract:
-      operator = `-`;
-      break;
-    case btnMultiply:
-      operator = `*`;
-      break;
-    case btnDivide:
-      operator = `/`;
-      break;
-  }
-
-  btn.addEventListener(`click`, () => {
-    equation.push(numbers.join(``), operator);
-
-    numbers = [];
-
-    checkLogic();
-  });
-}
+function pushEquation(btn) {}
 
 btnEquals.addEventListener(`click`, () => {
   equation.push(numbers.join(``));
@@ -157,15 +130,6 @@ btnEquals.addEventListener(`click`, () => {
 
 // Operate
 
-function operate() {
-  const equationNum = equation.map((item) => {});
-
-  console.log(equationNum);
-}
+function operate() {}
 
 // Run code
-
-pushEquation(btnAdd);
-pushEquation(btnDivide);
-pushEquation(btnSubtract);
-pushEquation(btnMultiply);
