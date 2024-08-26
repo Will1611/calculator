@@ -39,6 +39,7 @@ const darkBlue = `#4f4fc2`;
 let equation = [];
 let numbers = [];
 let isNegative = false;
+let isLightBlue = false;
 
 // Arithmetic functions
 
@@ -63,13 +64,8 @@ function divide(...nums) {
 }
 
 // Misc functions
-function changeColor() {
-  btnOps.forEach((btn) => {
-    if (btn.style.backgroundColor === darkBlue) {
-      btn.style.backgroundColor = lightBlue;
-    } else btn.style.backgroundColor = darkBlue;
-  });
-}
+
+// Change button color
 
 // Green buttons
 btnNums.forEach((btn) => {
@@ -79,7 +75,6 @@ btnNums.forEach((btn) => {
     input.textContent = numbers.join(``);
 
     checkLogic();
-    changeColor();
   });
 });
 
@@ -90,9 +85,6 @@ btnClear.addEventListener(`click`, () => {
   equation = [];
 
   checkLogic();
-  // clearConsole();
-
-  changeColor();
 });
 
 btnNeg.addEventListener(`click`, () => {
@@ -114,8 +106,6 @@ btnNeg.addEventListener(`click`, () => {
 });
 
 btnPercent.addEventListener(`click`, () => {
-  // numbers.pop(input.textContent.length);
-
   if (input.textContent !== `0`) {
     input.textContent /= 100;
     numbers = [];
@@ -141,15 +131,11 @@ function pushEquation(btn) {
       operator = `*`;
       break;
     case btnDivide:
-      operator = `*`;
+      operator = `/`;
       break;
   }
 
   btn.addEventListener(`click`, () => {
-    changeColor();
-    btnEquals.style.backgroundColor = darkBlue;
-
-    btn.style.backgroundColor = lightBlue;
     equation.push(numbers.join(``), operator);
 
     numbers = [];
@@ -158,23 +144,26 @@ function pushEquation(btn) {
   });
 }
 
-// btnAdd.addEventListener(`click`, () => {
-//   changeColor();
-//   btnEquals.style.backgroundColor = darkBlue;
+btnEquals.addEventListener(`click`, () => {
+  equation.push(numbers.join(``));
+  numbers = [];
 
-//   btnAdd.style.backgroundColor = lightBlue;
-//   equation.push(numbers.join(``), `+`);
+  checkLogic();
 
-//   numbers = [];
-
-//   checkLogic();
-// });
+  operate();
+});
 
 // Operate
+
+function operate() {
+  const equationNum = equation.map((item) => {});
+
+  console.log(equationNum);
+}
+
+// Run code
 
 pushEquation(btnAdd);
 pushEquation(btnDivide);
 pushEquation(btnSubtract);
 pushEquation(btnMultiply);
-
-// getNums();
