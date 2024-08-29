@@ -3,7 +3,7 @@
 // Temp functions
 
 function checkLogic() {
-  console.log(equation, numbers, isNegative);
+  console.log(sum, initialValue, currentValue, operator);
 }
 
 function clearConsole() {
@@ -36,10 +36,10 @@ const lightBlue = `#aaaafb`;
 const darkBlue = `#4f4fc2`;
 
 // Logic variables
-let equation = [];
-let numbers = [];
-let isNegative = false;
-let isLightBlue = false;
+let sum = 0;
+let initialValue = ``;
+let currentValue = ``;
+let operator = ``;
 
 // Arithmetic functions
 
@@ -63,73 +63,105 @@ function divide(...nums) {
   }
 }
 
-// Misc functions
-
-// Change button color
-
-// Green buttons
-btnNums.forEach((btn) => {
-  btn.addEventListener(`click`, () => {
-    numbers.push(btn.textContent);
-
-    input.textContent = numbers.join(``);
-
-    checkLogic();
-  });
-});
-
 // Red buttons
 btnClear.addEventListener(`click`, () => {
   input.textContent = 0;
-  numbers = [];
-  equation = [];
+  sum = 0;
+  currentValue = ``;
+  operator = ``;
 
   checkLogic();
 });
 
 btnNeg.addEventListener(`click`, () => {
-  if (input.textContent !== `0`) {
-    if (isNegative === false) {
-      isNegative = true;
-      numbers.unshift(`-`);
-      input.textContent = numbers.join(``);
-
-      checkLogic();
-    } else {
-      isNegative = false;
-      numbers.shift();
-      input.textContent = numbers.join(``);
-
-      checkLogic();
-    }
-  }
+  // if (input.textContent !== `0`) {
+  //   if (isNegative === false) {
+  //     isNegative = true;
+  //     numbers.unshift(`-`);
+  //     input.textContent = numbers.join(``);
+  //     checkLogic();
+  //   } else {
+  //     isNegative = false;
+  //     numbers.shift();
+  //     input.textContent = numbers.join(``);
+  //     checkLogic();
+  //   }
+  // }
 });
 
 btnPercent.addEventListener(`click`, () => {
-  if (input.textContent !== `0`) {
-    input.textContent /= 100;
-    numbers = [];
-    numbers.push(input.textContent);
+  // if (input.textContent !== `0`) {
+  //   input.textContent /= 100;
+  //   numbers = [];
+  //   numbers.push(input.textContent);
+  //   checkLogic();
+  // }
+});
+
+// Green buttons
+btnNums.forEach((btn) => {
+  btn.addEventListener(`click`, () => {
+    currentValue += btn.textContent;
+    input.textContent = currentValue;
 
     checkLogic();
-  }
+    // numbers.push(btn.textContent);
+    // input.textContent = numbers.join(``);
+    // checkLogic();
+  });
 });
 
 // Blue buttons
 
-function pushEquation(btn) {}
+btnOps.forEach((btn) => {
+  btn.addEventListener(`click`, (event) => {
+    initialValue = currentValue;
+    currentValue = ``;
+
+    if (event.target === btnAdd) {
+      operator = `+`;
+    } else if (event.target === btnSubtract) {
+      operator = `-`;
+    } else if (event.target === btnMultiply) {
+      operator = `*`;
+    } else if (event.target === btnDivide) {
+      operator = `/`;
+    }
+
+    checkLogic();
+    // equation.push(numbers.join(``));
+    // equation.push(btn.textContent);
+    // numbers = [];
+    // checkLogic();
+  });
+});
 
 btnEquals.addEventListener(`click`, () => {
-  equation.push(numbers.join(``));
-  numbers = [];
+  if (operator === `+`) {
+    sum += Number(initialValue) + Number(currentValue);
+    initialValue = ``;
+    currentValue = ``;
+  } else if (operator === `-`) {
+    sum -= Number(currentValue);
+  } else if (operator === `*`) {
+    sum *= Number(currentValue);
+  } else if (operator === `/`) {
+    sum /= Number(currentValue);
+  }
 
+  input.textContent = sum;
+  operator = ``;
   checkLogic();
 
-  operate();
+  // equation.push(numbers.join(``));
+  // numbers = [];
+  // operate();
 });
 
 // Operate
 
-function operate() {}
+function operate() {
+  // console.log(`Equation is: ${equation.join(``)}`);
+}
 
 // Run code
