@@ -3,17 +3,15 @@
 // Temp functions
 
 function checkLogic() {
-  console.log(sum, initialValue, currentValue, operator);
-}
-
-function clearConsole() {
-  console.clear();
+  console.log(
+    `firstNum: ${firstNum}, secondNum: ${secondNum}, operator: ${operator}`
+  );
 }
 
 // DOM elements
 
 // Screen display
-const input = document.querySelector(`.input`);
+const display = document.querySelector(`.display`);
 
 // Individual blue buttons
 const btnDivide = document.querySelector(`.btn-divide`);
@@ -36,12 +34,11 @@ const lightBlue = `#aaaafb`;
 const darkBlue = `#4f4fc2`;
 
 // Logic variables
-let sum = 0;
-let initialValue = ``;
-let currentValue = ``;
-let operator = ``;
 
-// Arithmetic functions
+let firstNum = ``;
+let secondNum = ``;
+let operator = ``;
+let displayValue = ``;
 
 function add(...nums) {
   return nums.reduce((acc, curr) => acc + curr);
@@ -57,111 +54,69 @@ function multiply(...nums) {
 
 function divide(...nums) {
   if (nums.includes(0)) {
-    input.textContent = `NOPE`;
+    display.textContent = `NOPE`;
   } else {
     return nums.reduce((acc, curr) => acc / curr);
   }
 }
 
+function operate(num1, num2, operator) {
+  firstNum = Number(firstNum);
+  secondNum = Number(secondNum);
+
+  if (operator === `+`) {
+    firstNum = add(num1, num2);
+  } else if (operator === `-`) {
+    firstNum = subtract(num1, num2);
+  } else if (operator === `/`) {
+    firstNum = divide(num1, num2);
+  } else if (operator === `*`) {
+    firstNum = multiply(num1, num2);
+  }
+
+  operator = ``;
+}
+
 // Red buttons
 btnClear.addEventListener(`click`, () => {
-  input.textContent = 0;
-  sum = 0;
-  currentValue = ``;
+  firstNum = ``;
+  secondNum = ``;
   operator = ``;
-
-  checkLogic();
-});
-
-btnNeg.addEventListener(`click`, () => {
-  // if (input.textContent !== `0`) {
-  //   if (isNegative === false) {
-  //     isNegative = true;
-  //     numbers.unshift(`-`);
-  //     input.textContent = numbers.join(``);
-  //     checkLogic();
-  //   } else {
-  //     isNegative = false;
-  //     numbers.shift();
-  //     input.textContent = numbers.join(``);
-  //     checkLogic();
-  //   }
-  // }
-});
-
-btnPercent.addEventListener(`click`, () => {
-  // if (input.textContent !== `0`) {
-  //   input.textContent /= 100;
-  //   numbers = [];
-  //   numbers.push(input.textContent);
-  //   checkLogic();
-  // }
+  displayValue = ``;
+  display.textContent = `0`;
 });
 
 // Green buttons
 btnNums.forEach((btn) => {
   btn.addEventListener(`click`, () => {
-    currentValue += btn.textContent;
-    input.textContent = currentValue;
+    displayValue += btn.textContent;
+    display.textContent = displayValue;
 
-    checkLogic();
-    // numbers.push(btn.textContent);
-    // input.textContent = numbers.join(``);
-    // checkLogic();
+    if (!operator) {
+      firstNum = displayValue;
+    } else {
+      secondNum = displayValue;
+    }
   });
 });
 
 // Blue buttons
+btnAdd.addEventListener(`click`, () => {
+  operator = `+`;
+  displayValue = ``;
 
-btnOps.forEach((btn) => {
-  btn.addEventListener(`click`, (event) => {
-    initialValue = currentValue;
-    currentValue = ``;
+  operate(firstNum, secondNum, operator);
 
-    if (event.target === btnAdd) {
-      operator = `+`;
-    } else if (event.target === btnSubtract) {
-      operator = `-`;
-    } else if (event.target === btnMultiply) {
-      operator = `*`;
-    } else if (event.target === btnDivide) {
-      operator = `/`;
-    }
-
-    checkLogic();
-    // equation.push(numbers.join(``));
-    // equation.push(btn.textContent);
-    // numbers = [];
-    // checkLogic();
-  });
-});
-
-btnEquals.addEventListener(`click`, () => {
-  if (operator === `+`) {
-    sum += Number(initialValue) + Number(currentValue);
-    initialValue = ``;
-    currentValue = ``;
-  } else if (operator === `-`) {
-    sum -= Number(currentValue);
-  } else if (operator === `*`) {
-    sum *= Number(currentValue);
-  } else if (operator === `/`) {
-    sum /= Number(currentValue);
-  }
-
-  input.textContent = sum;
-  operator = ``;
   checkLogic();
-
-  // equation.push(numbers.join(``));
-  // numbers = [];
-  // operate();
 });
 
-// Operate
+btnSubtract.addEventListener(`click`, () => {
+  operator = `-`;
+  displayValue = ``;
 
-function operate() {
-  // console.log(`Equation is: ${equation.join(``)}`);
-}
+  operate(firstNum, secondNum, operator);
 
-// Run code
+  checkLogic();
+});
+
+btnEquals.addEventListener(`click`, () => {});

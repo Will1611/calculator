@@ -24,8 +24,8 @@ body {
 }
 
 .calculator {
-  width: 40%;
-  height: 75%;
+  width: 500px;
+  height: 800px;
   background-color: #444;
   border-radius: 20px;
   display: flex;
@@ -49,9 +49,10 @@ body {
   gap: 5px;
   margin-bottom: 20px;
   font-family: "Digital Counter 7";
+  box-shadow: inset 5px 4px 5px #0000004b;
 }
 
-.input {
+.display {
   overflow: hidden;
 }
 
